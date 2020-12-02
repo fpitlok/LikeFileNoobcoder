@@ -1,7 +1,7 @@
 from linepy import *
 import json, time, os, threading, asyncio, random
 
-access = [""]
+access = ["u18516bea481c93439cb4401ed9a0e4e1"]
 
 postid = str(open("db_postid.txt", "r").read()).split("\n")
 token = str(open("db_token.txt", "r").read()).split("\n")
@@ -21,7 +21,7 @@ def operationStart(op):
         text = msg.text
         if text.lower() == "check":
             if msg._from in access:
-                bot.sendMessage(msg._from, "ACTIVE WITH STATUSMESSAGE ACCESS 'NB'")
+                bot.sendMessage(msg._from, "ใช้งานอยู่พร้อมการเข้าถึง ข้อความแสดงสถานะ'NB'")
         elif text.lower().startswith("change "):
             if msg._from in access:
                 pass
@@ -42,11 +42,11 @@ def operationStart(op):
                                 cp = ch.getProfile();cp.displayName = newName;ch.updateProfile(cp)
                             except:
                                 pass
-                    return bot.sendMessage(msg._from, f"All bot set name to `{newName}`")
+                    return bot.sendMessage(msg._from, f"บอททั้งหมดตั้งชื่อเป็น `{newName}`")
                 threading.Thread(target=changeName).start()
             elif changed == "status":
                 newStatus = text.split(" status ")[1]
-                bot.sendMessage(msg._from, "Waiting for change status....")
+                bot.sendMessage(msg._from, "กําลังรอสถานะการเปลี่ยนแปลง....")
                 def changeStatus():
                     xxx = 0
                     for x in token:
@@ -62,7 +62,7 @@ def operationStart(op):
                 threading.Thread(target=changeStatus).start()
             elif changed == "pict":
                 picture = 1
-                return bot.sendMessage(msg._from, "Please send a photo to set as Avatar Bot!")
+                return bot.sendMessage(msg._from, "โปรดส่งภาพถ่ายเพื่อตั้งค่าเป็น Avatar Bot!")
             else:
                 return bot.sendMessage(msg._from, f"Keyword `{text.split(' ')[1]}` not found!\nMaybe u think ['name', 'status', 'pict']")
         else:
@@ -90,7 +90,7 @@ def operationStart(op):
                         except:
                             pass
                 picture = 0
-                return bot.sendMessage(msg._from, "Successfully changed all bot avatar!")
+                return bot.sendMessage(msg._from, "ประสบความสําเร็จในการเปลี่ยนแปลงอวตารบอททั้งหมด!")
             threading.Thread(target=changePict).start()
         else:
             return
